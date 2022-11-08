@@ -52,3 +52,5 @@ production:
   database: memory_production
   username: memory
   password: <%= ENV['MEMORY_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  url: <%= ENV['DATABASE_URL'] %>
