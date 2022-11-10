@@ -4,7 +4,7 @@
       <p class="prototype__hedding">
         <%= @tweet.title %>
       </p>
-      <%= link_to "by プロトタイプの投稿者", root_path, class: :prototype__user %>
+      <%= link_to "by #{@tweet.user.nickname}", root_path, class: :prototype__user %>
       <%# プロトタイプの投稿者とログインしているユーザーが同じであれば以下を表示する %>
         <div class="prototype__manage">
           <%= link_to "編集する", root_path, class: :prototype__btn %>
@@ -16,16 +16,21 @@
       </div>
       <div class="prototype__body">
         <div class="prototype__detail">
-          <p class="detail__title">キャッチコピー</p>
+          <p class="detail__title">タイトル</p>
           <p class="detail__message">
-            <%= "プロトタイプのキャッチコピー" %>
+            <%= @tweet.title %>
           </p>
         </div>
         <div class="prototype__detail">
-          <p class="detail__title">コンセプト</p>
+          <p class="detail__title">本文</p>
           <p class="detail__message">
-            <%= "プロトタイプのコンセプト" %>
+            <%= @tweet.text %>
           </p>
+        </div>
+        <div class="prototype__detail">
+          <p class="detail__title">#</p>
+          <p class="detail__message">
+            <%= @tweet.hashtag %>
         </div>
       </div>
       <div class="prototype__comments">
