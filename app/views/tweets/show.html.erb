@@ -9,12 +9,14 @@
         <div class="prototype__manage">
         <% if user_signed_in? && current_user.id == @tweet.user_id %>
           <%= link_to "編集する", edit_tweet_path(@tweet.id), class: :prototype__btn %>
-          <%= link_to "削除する", root_path, class: :prototype__btn %>
+          <%= link_to "削除する", tweet_path(@tweet.id), method: :delete, class: :prototype__btn %>
         </div>
         <% end %>
       <%# // プロトタイプの投稿者とログインしているユーザーが同じであれば上記を表示する %>
       <div class="prototype__image">
-        <%= image_tag @tweet.image %>
+        <% if @tweet.image.attached? %>
+          <%= image_tag @tweet.image %> 
+        <% end %>
       </div>
       <div class="prototype__body">
         <div class="prototype__detail">
