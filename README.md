@@ -63,7 +63,7 @@
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| text               | text       | null: false                    |
+| content            | text       | null: false                    |
 | user               | references | null: false, foreign_key: true |
 | tweet              | references | null: false, foreign_key: true |
 
