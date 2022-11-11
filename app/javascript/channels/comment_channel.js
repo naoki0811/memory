@@ -3,7 +3,10 @@ import consumer from "./consumer"
 if(location.pathname.match(/\/tweets\/\d/)){
   
 
-  consumer.subscriptions.create("CommentChannel", {
+  consumer.subscriptions.create({
+    channel: "CommentChannel",
+    tweet_id: location.pathname.match(/\d+/)[0]
+  }, {
     connected() {
     // Called when the subscription is ready for use on the server
     },

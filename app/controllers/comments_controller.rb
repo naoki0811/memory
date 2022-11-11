@@ -1,8 +1,9 @@
 class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
+    @tweet = Tweet.find(params[:tweet_id])
     if @comment.save
-      ActionCable.server.broadcast "comment_channel", {comment: @comment, user: @comment.user}
+      CommentChannel.broadcast_to @tweet, { comment: @comment, user: @comment.user }
     else
       @tweet = @comment.tweet
       @comments = @tweet.comments
