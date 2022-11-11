@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
-      redirect_to tweet_path(@comment.tweet)
+      ActionCable.server.broadcast "comment_channel", {comment: @comment, user: @comment.user}
     else
       @tweet = @comment.tweet
       @comments = @tweet.comments
