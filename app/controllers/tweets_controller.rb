@@ -1,10 +1,12 @@
 class TweetsController < ApplicationController
+  before_action :set_tweet, only: [:edit, :update, :show]
+
   def index
     @tweet = Tweet.all
   end
 
   def new
-   @tweet = Tweet.new
+    @tweet = Tweet.new
   end
 
   def create
@@ -17,14 +19,12 @@ class TweetsController < ApplicationController
   end
 
   def edit
-    @tweet = Tweet.find(params[:id])
     if @tweet.user_id != current_user.id 
       redirect_to root_path
    end
   end
 
   def update
-    @tweet = Tweet.find(params[:id])
     if @tweet.update(tweet_params)
       redirect_to tweet_path
     else
@@ -32,11 +32,22 @@ class TweetsController < ApplicationController
     end
   end
 
-  def show
-    @tweet = Tweet.find(params[:id])
+  def destroy
+    tweet = Tweet.find(params[:id])
+    tweet.destroy
+    redirect_to root_path
   end
+
+  def show
+  end
+
+  private
 
   def tweet_params
     params.require(:tweet).permit(:title, :text, :hashtag, :image).merge(user_id: current_user.id)
+  end
+
+  def set_tweet
+    @tweet = Tweet.find(params[:id])
   end
 end
