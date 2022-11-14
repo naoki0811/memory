@@ -52,4 +52,8 @@ production:
   database: memory_production
   username: memory
   password: <%= ENV['DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
+
 
